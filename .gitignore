@@ -1,0 +1,7 @@
+*~
+*.bak
+Thumbs.db
+desktop.ini
+vendor
+composer.phar
+phpunit.xml
