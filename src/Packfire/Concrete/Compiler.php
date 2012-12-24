@@ -63,8 +63,9 @@ abstract class Compiler {
         if($file->getRealPath() == __DIR__){
             return;
         }
+
         $path = str_replace(
-                dirname(dirname(dirname(__DIR__))) . DIRECTORY_SEPARATOR,
+                dirname(dirname($_SERVER['SCRIPT_NAME'])) . DIRECTORY_SEPARATOR,
                 '', $file->getRealPath());
         $content = file_get_contents($file);
         $content = preg_replace('{^#!/usr/bin/env php\s*}', '', $content);
