@@ -23,8 +23,7 @@ use Symfony\Component\Process\Process;
  * @since 1.0.0
  * @link https://github.com/packfire/concrete
  */
-
-class Compiler {
+abstract class Compiler {
     
     protected $version;
     
