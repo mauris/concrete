@@ -23,6 +23,6 @@
         "symfony/process": "2.1.*"
     },
     "autoload": {
-        "psr-0": {"Packfire\\Concrete": "src/Packfire/"}
+        "psr-0": {"Packfire\\Concrete": "src/"}
     }
 }
