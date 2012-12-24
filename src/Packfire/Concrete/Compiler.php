@@ -76,6 +76,9 @@ abstract class Compiler {
         $content = file_get_contents($file);
         $content = preg_replace('{^#!/usr/bin/env php\s*}', '', $content);
         $content = str_replace('{{version}}', $this->version, $content);
+        if($this->processor instanceof \Packfire\Concrete\Processor\IProcessor){
+            $content = $this->processor->process($content);
+        }
 
         $this->phar->addFromString($path, $content);
     }
