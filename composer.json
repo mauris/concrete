@@ -1,0 +1,28 @@
+{
+    "name": "packfire/concrete",
+    "description": "Packfire Concrete: PHAR compiler for PHP-CLI applications",
+    "homepage": "http://mauris.sg/packfire/",
+    "type": "library",
+    "keywords": [
+      "php",
+      "cli",
+      "phar",
+      "compiler"
+    ],
+    "authors":[
+        {
+            "name": "Sam-Mauris Yong",
+            "email": "mauris@hotmail.sg",
+            "homepage": "http://mauris.sg/",
+            "role": "Developer"
+        }
+    ],
+    "license": "BSD-3-Clause",
+    "require":{
+        "php": ">=5.3.0",
+        "symfony/process": "2.1.*"
+    },
+    "autoload": {
+        "psr-0": {"Packfire\\Concrete": "src/Packfire/"}
+    }
+}
