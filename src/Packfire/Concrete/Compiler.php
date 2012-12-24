@@ -31,9 +31,15 @@ abstract class Compiler {
     
     protected $processor;
 
-    public function __construct($file){
+    protected $root;
+
+    public function __construct($file, $root = null){
         if(is_file($file)){
             @unlink($file);
+        }
+        $this->root = $root;
+        if(!$this->root){
+            $this->root = dirname(dirname($_SERVER['SCRIPT_NAME'])) . DIRECTORY_SEPARATOR;
         }
         $this->phar = new \Phar($file, 0, basename($file));
     }
@@ -65,7 +71,7 @@ abstract class Compiler {
         }
 
         $path = str_replace(
-                dirname(dirname($_SERVER['SCRIPT_NAME'])) . DIRECTORY_SEPARATOR,
+                $this->root,
                 '', $file->getRealPath());
         $content = file_get_contents($file);
         $content = preg_replace('{^#!/usr/bin/env php\s*}', '', $content);
