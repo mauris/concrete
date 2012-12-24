@@ -26,9 +26,9 @@ use Symfony\Component\Process\Process;
 
 class Compiler {
     
-    private $version;
+    protected $version;
     
-    private $phar;
+    protected $phar;
     
     protected $processor;
 
