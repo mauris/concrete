@@ -24,13 +24,28 @@ namespace Packfire\Concrete\Processor;
 
 class Stack implements IProcessor {
 
+    /**
+     * The collection of processors
+     * @var array
+     * @since 1.0.0
+     */
 	private $processors = array();
 
-	public function __construct(IProcessor $processor){
+    /**
+     * Create a new Stack object
+     * @param \Packfire\Concrete\Processor\IProcessor $processor,... An arbituary number of processors to stack up
+     * @since 1.0.0
+     */
+	public function __construct(\Packfire\Concrete\Processor\IProcessor $processor){
 		$this->processors = func_get_args();
 	}
     
-    public function process($source){
+    /**
+     * Process the source code
+     * @param string $source The original source code to be processed
+     * @since 1.0.0
+     */
+    public function process(string $source){
         foreach($this->processors as $processor){
         	$source = $processor->process($source);
         }

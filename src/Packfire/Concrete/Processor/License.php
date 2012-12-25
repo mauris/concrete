@@ -24,6 +24,11 @@ namespace Packfire\Concrete\Processor;
 
 class License implements IProcessor {
     
+    /**
+     * Process the source code
+     * @param string $source The original source code to be processed
+     * @since 1.0.0
+     */
     public function process($source){
         return "\n\n$source\n\n";
     }
