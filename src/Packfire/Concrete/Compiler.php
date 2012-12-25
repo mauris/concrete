@@ -54,7 +54,7 @@ abstract class Compiler {
      *                     from.
      * @since 1.0.0
      */
-    public function __construct(string $file, string $root = null){
+    public function __construct($file, $root = null){
         if(is_file($file)){
             @unlink($file);
         }

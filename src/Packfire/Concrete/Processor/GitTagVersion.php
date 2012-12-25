@@ -55,7 +55,7 @@ class GitTagVersion implements IProcessor {
      * @param string $source The original source code to be processed
      * @since 1.0.1
      */
-    public function process(string $source){
+    public function process($source){
     	if($this->version){
             $source =  str_replace('{{version}}', $this->version, $source);
     	}
