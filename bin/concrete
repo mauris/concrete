@@ -10,7 +10,9 @@
  * All rights reserved.
  */
 
-require(__DIR__ . '/../vendor/autoload.php');
+require(__DIR__ . '/../src/Packfire/Concrete/Bootstrap.php');
 
-$concrete = new \Packfire\Concrete\Concrete();
+use Packfire\Concrete\Concrete;
+
+$concrete = new Concrete();
 $concrete->build();
