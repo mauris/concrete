@@ -58,6 +58,8 @@ class Concrete extends Compiler{
         foreach($result as $entry){
             if($entry instanceof \SplFileInfo){
                 $this->addFile($entry);
+            }elseif($entry instanceof \Packfire\Concrete\Processor\IProcessor){
+                $this->processor = $entry;
             }
         }
     }

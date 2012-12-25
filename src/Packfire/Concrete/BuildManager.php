@@ -102,6 +102,7 @@ class BuildManager{
         if(property_exists($set, 'processor')){
             $processorCount = $this->pushProcessor($set->processor);
         }
+        $this->result[] = $this->processor;
         foreach($set->build as $entry){
             if(is_object($entry)){
                 $this->processBuildSet($entry);
