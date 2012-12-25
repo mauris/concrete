@@ -48,7 +48,7 @@ abstract class Compiler {
     protected $root;
 
     /**
-     * Create a new Compilre object
+     * Create a new Compiler object
      * @param string $file The pathname to the output phar file
      * @param string $root The path of the root directory to build the phar file
      *                     from.
