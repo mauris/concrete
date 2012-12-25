@@ -21,7 +21,6 @@ namespace Packfire\Concrete\Processor;
  * @since 1.0.0
  * @link https://github.com/packfire/concrete
  */
-
 class Stack implements IProcessor {
 
     /**
@@ -29,27 +28,27 @@ class Stack implements IProcessor {
      * @var array
      * @since 1.0.0
      */
-	private $processors = array();
+    private $processors = array();
 
     /**
      * Create a new Stack object
      * @param \Packfire\Concrete\Processor\IProcessor $processor,... An arbituary number of processors to stack up
      * @since 1.0.0
      */
-	public function __construct(\Packfire\Concrete\Processor\IProcessor $processor){
-		$this->processors = func_get_args();
-	}
-    
+    public function __construct(\Packfire\Concrete\Processor\IProcessor $processor) {
+        $this->processors = func_get_args();
+    }
+
     /**
      * Process the source code
      * @param string $source The original source code to be processed
      * @since 1.0.0
      */
-    public function process(string $source){
-        foreach($this->processors as $processor){
-        	$source = $processor->process($source);
+    public function process($source) {
+        foreach ($this->processors as $processor) {
+            $source = $processor->process($source);
         }
         return $source;
     }
-    
+
 }

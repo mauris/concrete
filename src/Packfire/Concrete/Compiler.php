@@ -61,7 +61,7 @@ abstract class Compiler {
      *                     from.
      * @since 1.0.0
      */
-    public function __construct(string $file, string $root = null){
+    public function __construct($file, $root = null){
         if(is_file($file)){
             @unlink($file);
         }
@@ -97,7 +97,7 @@ abstract class Compiler {
      * @param string $folder The pathname to the folder to be added
      * @since 1.0.0
      */
-    protected function addFolder(string $folder){
+    protected function addFolder($folder){
         $iterator = new \RecursiveIteratorIterator(
                         new \RecursiveDirectoryIterator($folder),
                 \RecursiveIteratorIterator::LEAVES_ONLY

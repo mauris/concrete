@@ -29,6 +29,6 @@ interface IProcessor {
      * @param string $source The original source code to be processed
      * @since 1.0.0
      */
-    public function process(string $source);
+    public function process($source);
     
 }
