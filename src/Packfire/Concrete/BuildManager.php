@@ -34,8 +34,8 @@ class BuildManager{
     private $result;
     
     /**
-     * The current processor
-     * @var \Packfire\Concrete\Processor\Stack
+     * The current processors
+     * @var array
      * @since 1.1.0
      */
     private $processor;
@@ -44,7 +44,7 @@ class BuildManager{
      * Create a new BuildManager object
      */
     public function __construct(){
-        $this->processor = new Stack();
+        $this->processor = array();
     }
     
     /**
@@ -85,7 +85,7 @@ class BuildManager{
                     $name = $processor->name;
                     $instance = new $name();
                 }
-                $this->processor->push($instance);
+                array_push($this->processor, $instance);
                 ++$count;
             }
         }
@@ -102,7 +102,7 @@ class BuildManager{
         if(property_exists($set, 'processor')){
             $processorCount = $this->pushProcessor($set->processor);
         }
-        $this->result[] = $this->processor;
+        $this->result[] = new Stack($this->processor);
         foreach($set->build as $entry){
             if(is_object($entry)){
                 $this->processBuildSet($entry);
@@ -125,7 +125,7 @@ class BuildManager{
             }
         }
         for($i = 0; $i < $processorCount; ++$i){
-            $this->processor->pop();
+            array_pop($this->processor);
         }
     }
     
