@@ -24,6 +24,11 @@ namespace Packfire\Concrete\Processor;
 
 interface IProcessor {
     
-    public function process($source);
+    /**
+     * Process the source code
+     * @param string $source The original source code to be processed
+     * @since 1.0.0
+     */
+    public function process(string $source);
     
 }
