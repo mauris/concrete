@@ -11,6 +11,6 @@
  */
 
 Phar::mapPhar('concrete.phar');
-require 'phar://concrete.phar/bin/concrete';
+require 'bin/concrete';
 
 __HALT_COMPILER();

@@ -11,6 +11,8 @@
 
 namespace Packfire\Concrete;
 
+use Packfire\Concrete\BuildManager;
+
 /**
  * Provides solid Concrete application interfacing
  * 
@@ -21,7 +23,7 @@ namespace Packfire\Concrete;
  * @since 1.1.0
  * @link https://github.com/packfire/concrete
  */
-class Concrete extends Compiler{
+class Concrete extends Compiler {
     
     /**
      * The configuration loaded from the JSON file
