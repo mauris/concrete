@@ -25,15 +25,43 @@ use Symfony\Component\Process\Process;
  */
 abstract class Compiler {
     
+    /**
+     * The version number to 
+     * @var string
+     * @since 1.0.0 
+     */
     protected $version;
     
+    /**
+     * The original Phar object
+     * @var \Phar
+     * @since 1.0.0
+     */
     protected $phar;
     
+    /**
+     * The current processor that processes the file.
+     * If there is no processor, this is set to null.
+     * @var \Packfire\Concrete\Processor\IProcessor
+     * @since 1.0.0
+     */
     protected $processor;
 
+    /**
+     * The root directory to work from
+     * @var string
+     * @since 1.0.0
+     */
     protected $root;
 
-    public function __construct($file, $root = null){
+    /**
+     * Create a new Compilre object
+     * @param string $file The pathname to the output phar file
+     * @param string $root The path of the root directory to build the phar file
+     *                     from.
+     * @since 1.0.0
+     */
+    public function __construct(string $file, string $root = null){
         if(is_file($file)){
             @unlink($file);
         }
@@ -44,18 +72,32 @@ abstract class Compiler {
         $this->phar = new \Phar($file, 0, basename($file));
     }
     
+    /**
+     * Override this method to perform the compilation actions.
+     * @since 1.0.0
+     */
     protected abstract function compile();
 
+    /**
+     * Build the Phar binary
+     * @since 1.0.0
+     */
     public function build(){
         $this->loadVersion();
         $this->phar->setSignatureAlgorithm(\Phar::SHA1);
         $this->compile();
-        if($stub = $this->stub()){
+        $stub = $this->stub();
+        if($stub){
             $this->phar->setStub($stub);
         }
     }
     
-    protected function addFolder($folder){
+    /**
+     * Add a folder of files into the Phar binary file
+     * @param string $folder The pathname to the folder to be added
+     * @since 1.0.0
+     */
+    protected function addFolder(string $folder){
         $iterator = new \RecursiveIteratorIterator(
                         new \RecursiveDirectoryIterator($folder),
                 \RecursiveIteratorIterator::LEAVES_ONLY
@@ -65,11 +107,12 @@ abstract class Compiler {
         }
     }
     
-    protected function addFile($file) {
-        if($file->getRealPath() == __DIR__){
-            return;
-        }
-
+    /**
+     * Add a file into the Phar binary
+     * @param \SplFileInfo $file The file to be added
+     * @since 1.0.0
+     */
+    protected function addFile(\SplFileInfo $file) {
         $path = str_replace(
                 $this->root,
                 '', $file->getRealPath());
@@ -83,10 +126,20 @@ abstract class Compiler {
         $this->phar->addFromString($path, $content);
     }
     
+    /**
+     * Override this method to provide a stub for the Phar file
+     * @return string Returns the source code of the Phar stub
+     * @since 1.0.0
+     */
     protected function stub(){
 
     }
     
+    /**
+     * Loads the version number from git tag
+     * @since 1.0.0
+     * @throws \RuntimeException Thrown when git log cannot be executed
+     */
     protected function loadVersion(){
         $process = new Process('git log --pretty="%h" -n1 HEAD', __DIR__);
         if ($process->run() != 0) {
