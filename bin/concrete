@@ -12,6 +12,5 @@
 
 require(__DIR__ . '/../vendor/autoload.php');
 
-chdir(__DIR__ . '/..');
 $concrete = new \Packfire\Concrete\Concrete();
 $concrete->build();
