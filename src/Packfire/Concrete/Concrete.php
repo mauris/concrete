@@ -55,34 +55,11 @@ class Concrete extends Compiler{
      * @since 1.1.0
      */
     protected function compile(){
-        $this->processBuildSet($this->config);
-    }
-    
-    /**
-     * Process a build set recursively
-     * @param object $set The build configuration set
-     * @since 1.1.0
-     */
-    protected function processBuildSet($set){
-        foreach($set->build as $entry){
-            if(is_object($entry)){
-                $this->processBuildSet($entry);
-            }else{
-                $find = new Finder();
-                if(is_dir($entry)){
-                    $find->files()
-                         ->in($entry);
-                }elseif(is_file($entry)){
-                    $find->files()
-                         ->depth('== 0')
-                         ->name(basename($entry))
-                         ->in(dirname($entry));
-                }else{
-                    $find = array();
-                }
-                foreach($find as $file){
-                    $this->addFile($file);
-                }
+        $manager = new BuildManager();
+        $result = $manager->process($this->config);
+        foreach($result as $entry){
+            if($entry instanceof \SplFileInfo){
+                $this->addFile($entry);
             }
         }
     }
