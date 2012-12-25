@@ -12,6 +12,7 @@
 namespace Packfire\Concrete;
 
 use Symfony\Component\Finder\Finder;
+use Packfire\Concrete\Processor\Stack;
 
 /**
  * Build Set Management
@@ -33,6 +34,20 @@ class BuildManager{
     private $result;
     
     /**
+     * The current processor
+     * @var \Packfire\Concrete\Processor\Stack
+     * @since 1.1.0
+     */
+    private $processor;
+    
+    /**
+     * Create a new BuildManager object
+     */
+    public function __construct(){
+        $this->processor = new Stack();
+    }
+    
+    /**
      * Process a build set
      * @param object $set The build configuration set
      * @return array Returns the complete process set
@@ -45,11 +60,48 @@ class BuildManager{
     }
     
     /**
+     * Process and processor tree recursively
+     * @param mixed $processor The processor data set
+     * @since 1.1.0
+     */
+    protected function pushProcessor($processor){
+        $count = 0;
+        if(is_string($processor)){
+            $processor = (object)array(
+                'name' => $processor
+            );
+        }
+        if(is_array($processor)){
+            foreach($processor as $entry){
+                $this->pushProcessor($entry);
+            }
+        }else{
+            if(property_exists($processor, 'name') && $processor->name){
+                $instance = null;
+                if(property_exists($processor, 'args')){
+                    $reflection = new \ReflectionClass($processor->name);
+                    $instance = $reflection->newInstanceArgs($processor->args);
+                }else{
+                    $name = $processor->name;
+                    $instance = new $name();
+                }
+                $this->processor->push($instance);
+                ++$count;
+            }
+        }
+        return $count;
+    }
+    
+    /**
      * Process a build set recursively
      * @param object $set The build configuration set
      * @since 1.1.0
      */
     protected function processBuildSet($set){
+        $processorCount = 0;
+        if(property_exists($set, 'processor')){
+            $processorCount = $this->pushProcessor($set->processor);
+        }
         foreach($set->build as $entry){
             if(is_object($entry)){
                 $this->processBuildSet($entry);
@@ -70,6 +122,9 @@ class BuildManager{
                     $this->result[] = $file;
                 }
             }
+        }
+        for($i = 0; $i < $processorCount; ++$i){
+            $this->processor->pop();
         }
     }
     
