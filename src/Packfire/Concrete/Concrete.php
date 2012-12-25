@@ -11,8 +11,6 @@
 
 namespace Packfire\Concrete;
 
-use Symfony\Component\Finder\Finder;
-
 /**
  * Provides solid Concrete application interfacing
  * 

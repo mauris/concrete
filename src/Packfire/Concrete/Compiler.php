@@ -11,8 +11,6 @@
 
 namespace Packfire\Concrete;
 
-use Symfony\Component\Process\Process;
-
 /**
  * Helps to provide compilation into a PHAR binary
  * 
