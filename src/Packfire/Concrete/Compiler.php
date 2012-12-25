@@ -85,21 +85,6 @@ abstract class Compiler {
     }
     
     /**
-     * Add a folder of files into the Phar binary file
-     * @param string $folder The pathname to the folder to be added
-     * @since 1.0.0
-     */
-    protected function addFolder(string $folder){
-        $iterator = new \RecursiveIteratorIterator(
-                        new \RecursiveDirectoryIterator($folder),
-                \RecursiveIteratorIterator::LEAVES_ONLY
-            );
-        foreach($iterator as $path){
-            $this->addFile($path);
-        }
-    }
-    
-    /**
      * Add a file into the Phar binary
      * @param \SplFileInfo $file The file to be added
      * @since 1.0.0
