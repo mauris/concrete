@@ -1,5 +1,6 @@
 {
-	"output": "concrete.phar",
+	"output": "concrete-build.phar",
+	"alias": "concrete.phar",
 	"stub": "res/stub.php",
 	"build":[
 		{
@@ -11,6 +12,7 @@
 		{
 			"processor": "\\Packfire\\Concrete\\Processor\\StripWhiteSpace",
 			"build":[
+				"bin",
 				"src",
 				"vendor"
 			]

@@ -53,6 +53,9 @@ class Concrete extends Compiler{
      * @since 1.1.0
      */
     protected function compile(){
+        if(property_exists($this->config, 'alias')){
+            $this->phar->setAlias($this->config->alias);
+        }
         $manager = new BuildManager();
         $result = $manager->process($this->config);
         foreach($result as $entry){
