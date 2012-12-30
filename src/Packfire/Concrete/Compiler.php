@@ -11,8 +11,6 @@
 
 namespace Packfire\Concrete;
 
-use Symfony\Component\Process\Process;
-
 /**
  * Helps to provide compilation into a PHAR binary
  * 
@@ -24,13 +22,6 @@ use Symfony\Component\Process\Process;
  * @link https://github.com/packfire/concrete
  */
 abstract class Compiler {
-    
-    /**
-     * The version number to 
-     * @var string
-     * @since 1.0.0 
-     */
-    protected $version;
     
     /**
      * The original Phar object
@@ -55,7 +46,7 @@ abstract class Compiler {
     protected $root;
 
     /**
-     * Create a new Compilre object
+     * Create a new Compiler object
      * @param string $file The pathname to the output phar file
      * @param string $root The path of the root directory to build the phar file
      *                     from.
@@ -83,27 +74,11 @@ abstract class Compiler {
      * @since 1.0.0
      */
     public function build(){
-        $this->loadVersion();
         $this->phar->setSignatureAlgorithm(\Phar::SHA1);
         $this->compile();
         $stub = $this->stub();
         if($stub){
             $this->phar->setStub($stub);
-        }
-    }
-    
-    /**
-     * Add a folder of files into the Phar binary file
-     * @param string $folder The pathname to the folder to be added
-     * @since 1.0.0
-     */
-    protected function addFolder($folder){
-        $iterator = new \RecursiveIteratorIterator(
-                        new \RecursiveDirectoryIterator($folder),
-                \RecursiveIteratorIterator::LEAVES_ONLY
-            );
-        foreach($iterator as $path){
-            $this->addFile($path);
         }
     }
     
@@ -118,7 +93,6 @@ abstract class Compiler {
                 '', $file->getRealPath());
         $content = file_get_contents($file);
         $content = preg_replace('{^#!/usr/bin/env php\s*}', '', $content);
-        $content = str_replace('{{version}}', $this->version, $content);
         if($this->processor instanceof \Packfire\Concrete\Processor\IProcessor){
             $content = $this->processor->process($content);
         }
@@ -133,24 +107,6 @@ abstract class Compiler {
      */
     protected function stub(){
 
-    }
-    
-    /**
-     * Loads the version number from git tag
-     * @since 1.0.0
-     * @throws \RuntimeException Thrown when git log cannot be executed
-     */
-    protected function loadVersion(){
-        $process = new Process('git log --pretty="%h" -n1 HEAD', __DIR__);
-        if ($process->run() != 0) {
-            throw new \RuntimeException('Can\'t run "git log". You must compile from git repository clone and that git binary is installed.');
-        }
-        $this->version = trim($process->getOutput());
-
-        $processTag = new Process('git describe --tags HEAD');
-        if ($processTag->run() == 0) {
-            $this->version = trim($processTag->getOutput());
-        }
     }
     
 }

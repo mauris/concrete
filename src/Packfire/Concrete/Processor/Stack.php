@@ -32,11 +32,32 @@ class Stack implements IProcessor {
 
     /**
      * Create a new Stack object
-     * @param \Packfire\Concrete\Processor\IProcessor $processor,... An arbituary number of processors to stack up
+     * @param array|\Packfire\Concrete\Processor\IProcessor $processor,... An arbituary number of processors to stack up
      * @since 1.0.0
      */
-    public function __construct(\Packfire\Concrete\Processor\IProcessor $processor) {
+    public function __construct() {
         $this->processors = func_get_args();
+        if(count($this->processors) == 1 && is_array($this->processors[0])){
+            $this->processors = $this->processors[0];
+        }
+    }
+    
+    /**
+     * Push a processor onto the stack
+     * @param \Packfire\Concrete\Processor\IProcessor $processor The processor to be added
+     * @since 1.1.0
+     */
+    public function push(\Packfire\Concrete\Processor\IProcessor $processor){
+        array_push($this->processors, $processor);
+    }
+    
+    /**
+     * Pop the last pushed processor off the stack
+     * @return \Packfire\Concrete\Processor\IProcessor Returns the processor removed
+     * @since 1.1.0
+     */
+    public function pop(){
+        return array_pop($this->processors);
     }
 
     /**

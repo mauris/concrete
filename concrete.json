@@ -1,0 +1,21 @@
+{
+	"output": "concrete-build.phar",
+	"alias": "concrete.phar",
+	"stub": "res/stub.php",
+	"build":[
+		{
+			"processor": "\\Packfire\\Concrete\\Processor\\License",
+			"build":[
+				"license"
+			]
+		},
+		{
+			"processor": "\\Packfire\\Concrete\\Processor\\StripWhiteSpace",
+			"build":[
+				"bin",
+				"src",
+				"vendor"
+			]
+		}
+	]
+}
