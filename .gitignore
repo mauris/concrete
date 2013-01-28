@@ -3,5 +3,5 @@
 Thumbs.db
 desktop.ini
 vendor
-composer.phar
+*.phar
 phpunit.xml
