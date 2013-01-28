@@ -65,7 +65,7 @@ class BuildManager{
      * @since 1.1.0
      */
     protected function pushProcessor($processor){
-        $count = 0;
+        $processors = array();
         if(is_string($processor)){
             $processor = (object)array(
                 'name' => $processor
@@ -73,7 +73,7 @@ class BuildManager{
         }
         if(is_array($processor)){
             foreach($processor as $entry){
-                $this->pushProcessor($entry);
+                $processors += $this->pushProcessor($entry);
             }
         }else{
             if(property_exists($processor, 'name') && $processor->name){
@@ -85,11 +85,10 @@ class BuildManager{
                     $name = $processor->name;
                     $instance = new $name();
                 }
-                array_push($this->processor, $instance);
-                ++$count;
+                array_push($processors, $instance);
             }
         }
-        return $count;
+        return $processors;
     }
     
     /**
@@ -98,11 +97,10 @@ class BuildManager{
      * @since 1.1.0
      */
     protected function processBuildSet($set){
-        $processorCount = 0;
         if(property_exists($set, 'processor')){
-            $processorCount = $this->pushProcessor($set->processor);
+            $processors = $this->pushProcessor($set->processor);
+            $this->result[] = new Stack($processors);
         }
-        $this->result[] = new Stack($this->processor);
         foreach($set->build as $entry){
             if(is_object($entry)){
                 $this->processBuildSet($entry);
@@ -124,9 +122,7 @@ class BuildManager{
                 }
             }
         }
-        for($i = 0; $i < $processorCount; ++$i){
-            array_pop($this->processor);
-        }
+        
     }
     
 }
