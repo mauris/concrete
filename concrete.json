@@ -1,5 +1,5 @@
 {
-	"output": "concrete-build.phar",
+	"output": "concrete.phar",
 	"alias": "concrete.phar",
 	"stub": "res/stub.php",
 	"build":[
@@ -10,7 +10,10 @@
 			]
 		},
 		{
-			"processor": "\\Packfire\\Concrete\\Processor\\StripWhiteSpace",
+			"processor": [
+				"\\Packfire\\Concrete\\Processor\\StripWhiteSpace",
+				"\\Packfire\\Concrete\\Processor\\GitTagVersion"
+			],
 			"build":[
 				"bin",
 				"src",
