@@ -28,6 +28,8 @@ After which, you may create a `Compiler` class that extends from `\Packfire\Conc
 
 ###Usage - CLI Tool
 
+> You can download a copy of the latest stable release of Concrete at [my website](http://mauris.sg/bin/concrete.phar). - Sam Yong
+
 Packfire Concrete uses `concrete.json` to compile itself into `concrete.phar` by running:
 
     $ php bin/concrete
