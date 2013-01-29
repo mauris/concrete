@@ -38,7 +38,7 @@ class GitTagVersion implements IProcessor {
      * @since 1.0.1
      */
     public function __construct(){
-        $process = new Process('git log --pretty="%h" -n1 HEAD', __DIR__);
+        $process = new Process('git log --pretty="%h" -n1 HEAD');
         if ($process->run() != 0) {
             throw new \RuntimeException('Can\'t run "git log". Git must be executable and you must compile from a git repository clone.');
         }

@@ -55,19 +55,23 @@ class Concrete extends Compiler {
      * @since 1.1.0
      */
     protected function compile(){
+        echo "Packfire Concrete v{{version}}\nSam-Mauris Yong\n\n";
         if(property_exists($this->config, 'alias')){
+            echo "Setting PHAR alias to " . $this->config->alias . "\n\n";
             $this->phar->setAlias($this->config->alias);
         }
-        $manager = new BuildManager();
-        $result = $manager->process($this->config);
+        echo "Compiling PHAR binary...\n";
+        $manager = new BuildManager($this->config);
+        $result = $manager->process();
         foreach($result as $entry){
             if($entry instanceof \SplFileInfo){
-                echo "Adding file $entry\n";
+                echo " + $entry\n";
                 $this->addFile($entry);
             }elseif($entry instanceof \Packfire\Concrete\Processor\IProcessor){
                 $this->processor = $entry;
             }
         }
+        echo "\nComplete.\n";
     }
     
     /**
