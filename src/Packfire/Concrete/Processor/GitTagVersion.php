@@ -57,7 +57,9 @@ class GitTagVersion implements IProcessor {
      */
     public function process($source){
     	if($this->version){
-            $source =  str_replace('{{version}}', $this->version, $source);
+            // the breaking up of the version string is to prevent it from being parsed
+            // during self-compilation.
+            $source =  str_replace('{{'.'version'.'}}', $this->version, $source);
     	}
     	return $source;
     }
