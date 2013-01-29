@@ -61,8 +61,8 @@ class Concrete extends Compiler {
             $this->phar->setAlias($this->config->alias);
         }
         echo "Compiling PHAR binary...\n";
-        $manager = new BuildManager();
-        $result = $manager->process($this->config);
+        $manager = new BuildManager($this->config);
+        $result = $manager->process();
         foreach($result as $entry){
             if($entry instanceof \SplFileInfo){
                 echo " + $entry\n";

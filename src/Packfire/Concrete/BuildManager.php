@@ -27,13 +27,6 @@ use Packfire\Concrete\Processor\Stack;
 class BuildManager{
     
     /**
-     * Processed build set result
-     * @var array
-     * @since 1.1.0
-     */
-    private $result;
-    
-    /**
      * The current processors
      * @var array
      * @since 1.1.0
@@ -41,10 +34,18 @@ class BuildManager{
     private $processor;
     
     /**
+     * The current working set
+     * @var object
+     * @since 1.1.1
+     */
+    private $set;
+    
+    /**
      * Create a new BuildManager object
      */
-    public function __construct(){
-        $this->processor = array();
+    public function __construct($set, $processors = array()){
+        $this->set = $set;
+        $this->processor = $processors;
     }
     
     /**
@@ -53,10 +54,36 @@ class BuildManager{
      * @return array Returns the complete process set
      * @since 1.1.0
      */
-    public function process($set){
-        $this->result = array();
-        $this->processBuildSet($set);
-        return $this->result;
+    public function process(){
+        $result = array();
+        if(property_exists($this->set, 'processor')){
+            $this->processor += $this->pushProcessor($this->set->processor);
+            $result[] = new Stack($this->processor);
+        }
+        foreach($this->set->build as $entry){
+            if(is_object($entry)){
+                $subManager = new BuildManager($entry, $this->processor);
+                $result = array_merge($result, $subManager->process());
+                $result[] = new Stack($this->processor);
+            }else{
+                $find = new Finder();
+                if(is_dir($entry)){
+                    $find->files()
+                         ->in($entry);
+                }elseif(is_file($entry)){
+                    $find->files()
+                         ->depth('== 0')
+                         ->name(basename($entry))
+                         ->in(dirname($entry));
+                }else{
+                    $find = array();
+                }
+                foreach($find as $file){
+                    $result[] = $file;
+                }
+            }
+        }
+        return $result;
     }
     
     /**
@@ -73,7 +100,7 @@ class BuildManager{
         }
         if(is_array($processor)){
             foreach($processor as $entry){
-                $processors += $this->pushProcessor($entry);
+                $processors = array_merge($processors, $this->pushProcessor($entry));
             }
         }else{
             if(property_exists($processor, 'name') && $processor->name){
@@ -85,44 +112,10 @@ class BuildManager{
                     $name = $processor->name;
                     $instance = new $name();
                 }
-                array_push($processors, $instance);
+                $processors[] = $instance;
             }
         }
         return $processors;
-    }
-    
-    /**
-     * Process a build set recursively
-     * @param object $set The build configuration set
-     * @since 1.1.0
-     */
-    protected function processBuildSet($set){
-        if(property_exists($set, 'processor')){
-            $processors = $this->pushProcessor($set->processor);
-            $this->result[] = new Stack($processors);
-        }
-        foreach($set->build as $entry){
-            if(is_object($entry)){
-                $this->processBuildSet($entry);
-            }else{
-                $find = new Finder();
-                if(is_dir($entry)){
-                    $find->files()
-                         ->in($entry);
-                }elseif(is_file($entry)){
-                    $find->files()
-                         ->depth('== 0')
-                         ->name(basename($entry))
-                         ->in(dirname($entry));
-                }else{
-                    $find = array();
-                }
-                foreach($find as $file){
-                    $this->result[] = $file;
-                }
-            }
-        }
-        
     }
     
 }
