@@ -1,5 +1,6 @@
 {
 	"output": "concrete.phar",
+	"alias": "concrete.phar",
 	"stub": "res/stub.php",
 	"build":[
 		{
