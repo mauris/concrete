@@ -20,7 +20,7 @@ namespace Packfire\Concrete\Processor;
  * @since 1.0.0
  * @link https://github.com/packfire/concrete
  */
-class Stack implements IProcessor
+class Stack implements ProcessorInterface
 {
     /**
      * The collection of processors
@@ -47,7 +47,7 @@ class Stack implements IProcessor
      * @param \Packfire\Concrete\Processor\IProcessor $processor The processor to be added
      * @since 1.1.0
      */
-    public function push(IProcessor $processor)
+    public function push(ProcessorInterface $processor)
     {
         array_push($this->processors, $processor);
     }

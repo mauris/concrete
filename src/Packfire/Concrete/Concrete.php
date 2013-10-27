@@ -11,7 +11,7 @@
 namespace Packfire\Concrete;
 
 use Packfire\Concrete\BuildManager;
-use Packfire\Concrete\Processor\IProcessor;
+use Packfire\Concrete\Processor\ProcessorInterface;
 
 /**
  * Provides solid Concrete application interfacing
@@ -70,7 +70,7 @@ class Concrete extends Compiler
             if ($entry instanceof \SplFileInfo) {
                 echo " + $entry\n";
                 $this->addFile($entry);
-            } elseif ($entry instanceof IProcessor) {
+            } elseif ($entry instanceof ProcessorInterface) {
                 $this->processor = $entry;
             }
         }

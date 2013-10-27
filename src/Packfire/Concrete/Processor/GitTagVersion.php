@@ -22,7 +22,7 @@ use Symfony\Component\Process\Process;
  * @since 1.0.1
  * @link https://github.com/packfire/concrete
  */
-class GitTagVersion implements IProcessor
+class GitTagVersion implements ProcessorInterface
 {
 
     /**

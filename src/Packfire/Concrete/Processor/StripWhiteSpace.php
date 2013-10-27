@@ -20,7 +20,7 @@ namespace Packfire\Concrete\Processor;
  * @since 1.0.0
  * @link https://github.com/packfire/concrete
  */
-class StripWhiteSpace implements IProcessor
+class StripWhiteSpace implements ProcessorInterface
 {
     /**
      * Process the source code

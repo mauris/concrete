@@ -20,7 +20,7 @@ namespace Packfire\Concrete\Processor;
  * @since 1.0.0
  * @link https://github.com/packfire/concrete
  */
-interface IProcessor
+interface ProcessorInterface
 {
     /**
      * Process the source code
