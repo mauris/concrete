@@ -24,6 +24,6 @@
         "symfony/finder": "2.2.*"
     },
     "autoload": {
-        "psr-0": {"Packfire\\Concrete": "src/"}
+        "psr-0": {"Packfire\\Concrete\\": "src/"}
     }
 }
