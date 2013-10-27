@@ -1,11 +1,10 @@
 <?php
-
 /**
  * Packfire Concrete
  * By Sam-Mauris Yong
- * 
+ *
  * Released open source under New BSD 3-Clause License.
- * Copyright (c) 2012, Sam-Mauris Yong Shan Xian <sam@mauris.sg>
+ * Copyright (c) 2013, Sam-Mauris Yong Shan Xian <sam@mauris.sg>
  * All rights reserved.
  */
 
@@ -15,15 +14,16 @@ use Symfony\Component\Process\Process;
 
 /**
  * A processor that fetch the version from Git tag and replace source code with actual versions
- * 
+ *
  * @author Sam-Mauris Yong <sam@mauris.sg>
- * @copyright 2012 Sam-Mauris Yong Shan Xian <sam@mauris.sg>
+ * @copyright 2013 Sam-Mauris Yong Shan Xian <sam@mauris.sg>
  * @license http://www.opensource.org/licenses/BSD-3-Clause The BSD 3-Clause License
  * @package \Packfire\Concrete\Processor
  * @since 1.0.1
  * @link https://github.com/packfire/concrete
  */
-class GitTagVersion implements IProcessor {
+class GitTagVersion implements ProcessorInterface
+{
 
     /**
      * The version number fetched from the Git repository
@@ -37,7 +37,8 @@ class GitTagVersion implements IProcessor {
      * @throws \RuntimeException Thrown when "git log" cannot be executed.
      * @since 1.0.1
      */
-    public function __construct(){
+    public function __construct()
+    {
         $process = new Process('git log --pretty="%h" -n1 HEAD');
         if ($process->run() != 0) {
             throw new \RuntimeException('Can\'t run "git log". Git must be executable and you must compile from a git repository clone.');
@@ -49,19 +50,19 @@ class GitTagVersion implements IProcessor {
             $this->version = trim($processTag->getOutput());
         }
     }
-    
+
     /**
      * Process the source code
      * @param string $source The original source code to be processed
      * @since 1.0.1
      */
-    public function process($source){
-    	if($this->version){
+    public function process($source)
+    {
+        if ($this->version) {
             // the breaking up of the version string is to prevent it from being parsed
             // during self-compilation.
             $source =  str_replace('{{'.'version'.'}}', $this->version, $source);
-    	}
-    	return $source;
+        }
+        return $source;
     }
-    
 }
