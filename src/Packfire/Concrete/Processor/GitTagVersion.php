@@ -47,7 +47,7 @@ class GitTagVersion implements ProcessorInterface
 
         $processTag = new Process('git describe --tags HEAD');
         if ($processTag->run() == 0) {
-            $this->version = trim($processTag->getOutput());
+            $this->version = trim(strtok($processTag->getOutput(), "\n"));
         }
     }
 
