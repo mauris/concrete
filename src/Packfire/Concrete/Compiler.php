@@ -10,6 +10,8 @@
 
 namespace Packfire\Concrete;
 
+use Packfire\Concrete\Processor\ProcessorInterface;
+
 /**
  * Helps to provide compilation into a PHAR binary
  *
@@ -97,7 +99,7 @@ abstract class Compiler
         );
         $content = file_get_contents($file);
         $content = preg_replace('{^#!/usr/bin/env php\s*}', '', $content);
-        if ($this->processor instanceof \Packfire\Concrete\Processor\IProcessor) {
+        if ($this->processor instanceof ProcessorInterface) {
             $content = $this->processor->process($content);
         }
 
