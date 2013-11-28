@@ -3,11 +3,11 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "2a9b4f9d0397a57ab7eb17e5ef21400b",
+    "hash": "ca5fed1a1889f9fc3f94b9c7543a69ac",
     "packages": [
         {
             "name": "symfony/finder",
-            "version": "v2.2.9",
+            "version": "v2.2.10",
             "target-dir": "Symfony/Component/Finder",
             "source": {
                 "type": "git",
@@ -54,17 +54,17 @@
         },
         {
             "name": "symfony/process",
-            "version": "v2.2.9",
+            "version": "v2.2.10",
             "target-dir": "Symfony/Component/Process",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Process.git",
-                "reference": "c7e4d13ad1bc77ef82087f384c7ed7348553c096"
+                "reference": "f9c619629af68da7c4b2a010ab0a1b732e2f9548"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Process/zipball/c7e4d13ad1bc77ef82087f384c7ed7348553c096",
-                "reference": "c7e4d13ad1bc77ef82087f384c7ed7348553c096",
+                "url": "https://api.github.com/repos/symfony/Process/zipball/f9c619629af68da7c4b2a010ab0a1b732e2f9548",
+                "reference": "f9c619629af68da7c4b2a010ab0a1b732e2f9548",
                 "shasum": ""
             },
             "require": {
@@ -97,7 +97,7 @@
             ],
             "description": "Symfony Process Component",
             "homepage": "http://symfony.com",
-            "time": "2013-10-09 20:52:58"
+            "time": "2013-10-21 11:56:16"
         }
     ],
     "packages-dev": [
