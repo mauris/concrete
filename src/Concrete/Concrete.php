@@ -1,27 +1,27 @@
 <?php
 /**
- * Packfire Concrete
+ * Concrete PHAR Compiler
  * By Sam-Mauris Yong
  *
  * Released open source under New BSD 3-Clause License.
- * Copyright (c) 2013, Sam-Mauris Yong Shan Xian <sam@mauris.sg>
+ * Copyright (c) 2014, Sam-Mauris Yong <sam@mauris.sg>
  * All rights reserved.
  */
 
-namespace Packfire\Concrete;
+namespace Concrete;
 
-use Packfire\Concrete\BuildManager;
-use Packfire\Concrete\Processor\ProcessorInterface;
+use Concrete\BuildManager;
+use Concrete\Processor\ProcessorInterface;
 
 /**
  * Provides solid Concrete application interfacing
  *
  * @author Sam-Mauris Yong <sam@mauris.sg>
- * @copyright 2013 Sam-Mauris Yong Shan Xian <sam@mauris.sg>
+ * @copyright 2014 Sam-Mauris Yong <sam@mauris.sg>
  * @license http://www.opensource.org/licenses/BSD-3-Clause The BSD 3-Clause License
- * @package \Packfire\Concrete
- * @since 1.1.0
- * @link https://github.com/packfire/concrete
+ * @package \Concrete
+ * @since 1.2.0
+ * @link https://github.com/mauris/concrete
  */
 class Concrete extends Compiler
 {
