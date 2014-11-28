@@ -1,9 +1,14 @@
 language: "php"
 
 php:
-  - "5.3"
-  - "5.4"
-  - "5.5"
+  - 5.3
+  - 5.4
+  - 5.5
+  - hhvm
+
+os:
+  - linux
+  - osx
 
 before_script:
   - "curl -s http://getcomposer.org/installer | php && php composer.phar install --prefer-source --no-interaction --dev"
