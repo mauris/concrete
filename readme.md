@@ -4,11 +4,11 @@
 
 ##What is Concrete?
 
-Concrete is a easy to use CLI tool that helps you to compile your PHP projects into PHAR binaries for distribution.
+Concrete is a simple CLI tool that helps you to compile your PHP application into PHAR binary for distribution.
 
 ##Usage
 
-There are two ways of using Packfire Concrete: as a Composer library or as a command line interface (CLI) tool.
+There are two ways of using Concrete: as a Composer library or as a command line interface (CLI) tool.
 
 ###Usage - Composer Library
 
@@ -32,7 +32,7 @@ Concrete uses `concrete.json` to compile itself into `concrete.phar` by running:
 
     $ php bin/concrete
 
-To help Packfire Concrete understand how to compile your project into a PHAR binary, provide the `concrete.json` file in the root directory:
+Concrete uses information found in the `concrete.json` file of the project directory to build the PHAR binary. A sample configuration file may look like this:
 
     {
 		"output": "torch.phar",
