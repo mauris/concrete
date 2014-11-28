@@ -20,7 +20,9 @@
     "require":{
         "php": ">=5.3.3",
         "symfony/process": "2.5.*",
-        "symfony/finder": "2.5.*"
+        "symfony/finder": "2.5.*",
+        "symfony/console": "2.5.*"
+
     },
     "bin": [
         "bin/concrete"
