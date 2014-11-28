@@ -9,9 +9,9 @@
  * All rights reserved.
  */
 
-require(__DIR__ . '/../src/Packfire/Concrete/Bootstrap.php');
+require(__DIR__ . '/../src/Concrete/Bootstrap.php');
 
-use Packfire\Concrete\Concrete;
+use Concrete\Concrete;
 
 $concrete = new Concrete();
 $concrete->build();

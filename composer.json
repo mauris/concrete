@@ -29,6 +29,6 @@
         "bin-dir": "bin"
     },
     "autoload": {
-        "psr-4": {"Packfire\\Concrete\\": "src/Packfire/Concrete"}
+        "psr-4": {"Concrete\\": "src/Concrete"}
     }
 }

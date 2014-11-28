@@ -31,7 +31,7 @@ class Bootstrap
 
     public static function run()
     {
-        if (!($loader = self::acquire(__DIR__ . '/../../../vendor/autoload.php'))) {
+        if (!($loader = self::acquire(__DIR__ . '/../../vendor/autoload.php'))) {
             echo 'You must set up project\'s dependencies first by running the following commands:' . PHP_EOL;
             echo "    curl -s https://getcomposer.org/installer | php\n";
             echo "    php composer.phar install\n";
