@@ -61,4 +61,4 @@ Afterwhich, you can run the following command with the `concrete.phar` binary av
 
 ##License
 
-Packfire Concrete is released open source under the BSD 3-Clause License. See the `license` file in repository for details.
+Concrete is released open source under the BSD 3-Clause License. See the `license` file in repository for details.
