@@ -47,6 +47,13 @@ abstract class Compiler
     protected $root;
 
     /**
+     * The file path name
+     * @var string
+     * @since 1.2.0
+     */
+    protected $file;
+
+    /**
      * Create a new Compiler object
      * @param string $file The pathname to the output phar file
      * @param string $root The path of the root directory to build the phar file
@@ -62,7 +69,23 @@ abstract class Compiler
         if (!$this->root) {
             $this->root = dirname(dirname($_SERVER['SCRIPT_NAME'])) . DIRECTORY_SEPARATOR;
         }
-        $this->phar = new \Phar($file, 0, basename($file));
+        $this->file = $file;
+    }
+
+    /**
+     * Perform environment check and output and error message.
+     * @return boolean Returns true if the check is fine, false otherwise.
+     * @since 1.0.0
+     */
+    protected function checkEnvironment()
+    {
+        $result = true;
+        $check = ini_get('phar.readonly');
+        if ($check) {
+            echo "Fatal Error: Concrete will not be able to compile PHAR files because the php.ini setting 'phar.readonly' is turned on. \n\nPlease turn off the setting before compiling.\n\n";
+            $result = false;
+        }
+        return $result;
     }
 
     /**
@@ -77,11 +100,14 @@ abstract class Compiler
      */
     public function build()
     {
-        $this->phar->setSignatureAlgorithm(\Phar::SHA1);
-        $this->compile();
-        $stub = $this->stub();
-        if ($stub) {
-            $this->phar->setStub($stub);
+        if ($this->checkEnvironment()) {
+            $this->phar = new \Phar($file, 0, basename($file));
+            $this->phar->setSignatureAlgorithm(\Phar::SHA1);
+            $this->compile();
+            $stub = $this->stub();
+            if ($stub) {
+                $this->phar->setStub($stub);
+            }
         }
     }
 
