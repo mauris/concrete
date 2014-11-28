@@ -1,24 +1,24 @@
 <?php
 /**
- * Packfire Concrete
+ * Concrete PHAR Compiler
  * By Sam-Mauris Yong
  *
  * Released open source under New BSD 3-Clause License.
- * Copyright (c) 2013, Sam-Mauris Yong Shan Xian <sam@mauris.sg>
+ * Copyright (c) 2014, Sam-Mauris Yong <sam@mauris.sg>
  * All rights reserved.
  */
 
-namespace Packfire\Concrete\Processor;
+namespace Concrete\Processor;
 
 /**
  * A stack of processors
  *
  * @author Sam-Mauris Yong <sam@mauris.sg>
- * @copyright 2013 Sam-Mauris Yong Shan Xian <sam@mauris.sg>
+ * @copyright 2014 Sam-Mauris Yong <sam@mauris.sg>
  * @license http://www.opensource.org/licenses/BSD-3-Clause The BSD 3-Clause License
- * @package \Packfire\Concrete\Processor
- * @since 1.0.0
- * @link https://github.com/packfire/concrete
+ * @package \Concrete\Processor
+ * @since 1.2.0
+ * @link https://github.com/mauris/concrete
  */
 class Stack implements ProcessorInterface
 {
@@ -31,7 +31,7 @@ class Stack implements ProcessorInterface
 
     /**
      * Create a new Stack object
-     * @param array|\Packfire\Concrete\Processor\IProcessor $processor,... An arbituary number of processors to stack up
+     * @param array|\Concrete\Processor\IProcessor $processor,... An arbituary number of processors to stack up
      * @since 1.0.0
      */
     public function __construct()
@@ -44,7 +44,7 @@ class Stack implements ProcessorInterface
 
     /**
      * Push a processor onto the stack
-     * @param \Packfire\Concrete\Processor\IProcessor $processor The processor to be added
+     * @param \Concrete\Processor\IProcessor $processor The processor to be added
      * @since 1.1.0
      */
     public function push(ProcessorInterface $processor)
@@ -54,7 +54,7 @@ class Stack implements ProcessorInterface
 
     /**
      * Pop the last pushed processor off the stack
-     * @return \Packfire\Concrete\Processor\IProcessor Returns the processor removed
+     * @return \Concrete\Processor\IProcessor Returns the processor removed
      * @since 1.1.0
      */
     public function pop()
