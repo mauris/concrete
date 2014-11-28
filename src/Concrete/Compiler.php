@@ -96,6 +96,7 @@ abstract class Compiler
 
     /**
      * Build the Phar binary
+     * @return boolean Returns true if the build is successful, false otherwise.
      * @since 1.0.0
      */
     public function build()
@@ -108,7 +109,9 @@ abstract class Compiler
             if ($stub) {
                 $this->phar->setStub($stub);
             }
+            return true;
         }
+        return false;
     }
 
     /**
