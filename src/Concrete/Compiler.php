@@ -101,7 +101,7 @@ abstract class Compiler
     public function build()
     {
         if ($this->checkEnvironment()) {
-            $this->phar = new \Phar($file, 0, basename($file));
+            $this->phar = new \Phar($this->file, 0, basename($this->file));
             $this->phar->setSignatureAlgorithm(\Phar::SHA1);
             $this->compile();
             $stub = $this->stub();
