@@ -1,4 +1,4 @@
-The <Packfire Concrete> (the "Software") is free re-distributable
+The <Concrete PHAR Compiler> (the "Software") is free re-distributable
 open-source software created by Sam-Mauris Yong (the "Author"), and it
 is released under the following Berkeley Software Distribution (BSD) License,
 also known as the "New BSD License".
@@ -7,7 +7,7 @@ By means of obtaining the Software, you (the "User") agree and shall comply to
 all terms and conditions of this license, and other licenses included with the
 Software (found the the "licenses" folder).
 
-Copyright (c) 2010-2012, Sam-Mauris Yong
+Copyright (c) 2010-2014, Sam-Mauris Yong
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
