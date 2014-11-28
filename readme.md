@@ -1,5 +1,7 @@
 #Concrete
 
+[![Build Status](https://travis-ci.org/mauris/concrete.svg?branch=master)](https://travis-ci.org/mauris/concrete) [![Latest Stable Version](https://poser.pugx.org/mauris/concrete/v/stable.svg)](https://packagist.org/packages/mauris/concrete) [![Total Downloads](https://poser.pugx.org/mauris/concrete/downloads.svg)](https://packagist.org/packages/mauris/concrete)
+
 >Rock-solid PHAR compiler for PHP
 
 ##What is Concrete?
