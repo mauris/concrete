@@ -32,7 +32,7 @@ class Bootstrap
     private static function getLoader()
     {
         $files = array(
-            dirname(dirname(__DIR__)) . '/autoload.php',
+            dirname(dirname(dirname(__DIR__))) . '/autoload.php',
             dirname(dirname(__DIR__)) . '/vendor/autoload.php'
         );
         foreach ($files as $file) {
