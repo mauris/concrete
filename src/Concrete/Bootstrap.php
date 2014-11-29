@@ -45,7 +45,7 @@ class Bootstrap
 
     public static function run()
     {
-        if (!($loader = self::getLoader()) {
+        if (!($loader = self::getLoader())) {
             echo 'You must set up project\'s dependencies first by running the following commands:' . PHP_EOL;
             echo "    curl -s https://getcomposer.org/installer | php\n";
             echo "    php composer.phar install\n";
