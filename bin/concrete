@@ -1,17 +1,19 @@
 #!/usr/bin/env php
 <?php
 /**
- * Packfire Concrete
+ * Concrete PHAR Compiler
  * By Sam-Mauris Yong
  *
  * Released open source under New BSD 3-Clause License.
- * Copyright (c) 2013, Sam-Mauris Yong Shan Xian <sam@mauris.sg>
+ * Copyright (c) 2014, Sam-Mauris Yong <sam@mauris.sg>
  * All rights reserved.
  */
 
 require(__DIR__ . '/../src/Concrete/Bootstrap.php');
 
-use Concrete\Concrete;
+use Concrete\Command\BuildCommand;
+use Symfony\Component\Console\Application;
 
-$concrete = new Concrete();
-$concrete->build();
+$application = new Application('Concrete PHAR Compiler for PHP', '{{version}}');
+$application->add(new BuildCommand());
+$application->run();
