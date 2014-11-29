@@ -10,7 +10,17 @@ Concrete is a simple CLI tool that helps you to compile your PHP application int
 
 ##Usage
 
-There are two ways of using Concrete: as a Composer library or as a command line interface (CLI) tool.
+There are three ways of using Concrete. Through [Composer](https://getcomposer.org/), you can install Concrete to your system hassle-free or include it as a library on your project. Alternatively, you can build Concrete into a PHAR archive and use the binary.
+
+###Usage - Composer CLI Application
+
+With great thanks to Composer, you can install Concrete on your machine. You must ensure that Composer is installed on your system. Run the following command to install Concrete.
+
+    composer global require mauris/concrete
+
+After installation is complete, you will be able to use concrete:
+
+    concrete build
 
 ###Usage - Composer Library
 
@@ -28,38 +38,19 @@ Then install your dependencies by following the [Composer installation](http://g
 
 After which, you may create a `Compiler` class that extends from `\Concrete\Compiler` and you may write your build script within the protected overriding method `compile()`. To build your PHAR binary, write a script to run the `build()` method of your `Compiler` class.
 
-###Usage - CLI Tool
+###Usage - PHAR Binary
+
+You can use Concrete as a standalone PHAR binary. Simply follow the instructions found in "Building Concrete" and you will get a `concrete.phar` archive readily for your use.
+
+##Building Concrete
 
 Concrete uses `concrete.json` to compile itself into `concrete.phar` by running:
 
     $ php bin/concrete
 
-Concrete uses information found in the `concrete.json` file of the project directory to build the PHAR binary. A sample configuration file may look like this:
+Concrete will use the information found in the `concrete.json` file of the project directory to build itself.
 
-    {
-		"output": "torch.phar",
-		"stub": "res/stub.php",
-		"build":[
-			{
-				"processor": "\\Concrete\\Processor\\License",
-				"build":[
-					"license"
-				]
-			},
-			{
-				"processor": "\\Concrete\\Processor\\StripWhiteSpace",
-				"build":[
-					"bin",
-					"src",
-					"vendor"
-				]
-			}
-		]
-	}
-
-Afterwhich, you can run the following command with the `concrete.phar` binary available:
-
-    $ php concrete.phar
+Afterwhich, you will find the `concrete.phar` generated in the current working directory.
 
 ##License
 
