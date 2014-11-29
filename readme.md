@@ -40,7 +40,10 @@ After which, you may create a `Compiler` class that extends from `\Concrete\Comp
 
 ###Usage - PHAR Binary
 
-You can use Concrete as a standalone PHAR binary. Simply follow the instructions found in "Building Concrete" and you will get a `concrete.phar` archive readily for your use.
+You can use Concrete as a standalone PHAR binary. Either
+
+1) Download from the [Release](https://github.com/mauris/concrete/releases) page; or,
+2) Follow the instructions found in "Building Concrete" to build the `concrete.phar`.
 
 ##Building Concrete
 
@@ -54,4 +57,4 @@ Afterwhich, you will find the `concrete.phar` generated in the current working d
 
 ##License
 
-Concrete is released open source under the BSD 3-Clause License. See the `license` file in repository for details.
+Concrete is released open source under the *BSD 3-Clause License*. See the `LICENSE` file in repository for details.
