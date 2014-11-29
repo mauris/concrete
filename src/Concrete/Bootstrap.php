@@ -29,9 +29,23 @@ class Bootstrap
         }
     }
 
+    private static function getLoader()
+    {
+        $files = array(
+            dirname(dirname(__DIR__)) . '/autoload.php',
+            dirname(dirname(__DIR__)) . '/vendor/autoload.php'
+        );
+        foreach ($files as $file) {
+            if ($loader = self::acquire($file)) {
+                return $loader;
+            }
+        }
+        return false;
+    }
+
     public static function run()
     {
-        if (!($loader = self::acquire(dirname(dirname(__DIR__)) . '/vendor/autoload.php'))) {
+        if (!($loader = self::getLoader()) {
             echo 'You must set up project\'s dependencies first by running the following commands:' . PHP_EOL;
             echo "    curl -s https://getcomposer.org/installer | php\n";
             echo "    php composer.phar install\n";
