@@ -54,11 +54,13 @@ class GitTagVersion implements ProcessorInterface
      */
     public function process($source)
     {
-        $version = $this->getVersion();
-        if ($version) {
-            // the breaking up of the version string is to prevent it from being parsed
-            // during self-compilation.
-            $source =  str_replace('{{'.'version'.'}}', $version, $source);
+        if (strpos($source, '{{' . 'version' . '}}') !== false) {
+            $version = $this->getVersion();
+            if ($version) {
+                // the breaking up of the version string is to prevent it from being parsed
+                // during self-compilation.
+                $source =  str_replace('{{'.'version'.'}}', $version, $source);
+            }
         }
         return $source;
     }
