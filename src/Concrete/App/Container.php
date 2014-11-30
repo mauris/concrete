@@ -32,12 +32,17 @@ class Container
             return new \Concrete\Concrete();
         };
 
+        $c['command.about'] = function ($c) {
+            return new \Concrete\Command\AboutCommand();
+        };
+
         $c['command.build'] = function ($c) {
             return new \Concrete\Command\BuildCommand($c);
         };
 
         $c['commands'] = function ($c) {
             return array(
+                $c['command.about'],
                 $c['command.build']
             );
         };
