@@ -28,21 +28,21 @@ class Container
     {
         $c = new Pimple();
 
-        $c['concrete'] = function($c) {
+        $c['concrete'] = function ($c) {
             return new \Concrete\Concrete();
         };
 
-        $c['command.build'] = function($c) {
+        $c['command.build'] = function ($c) {
             return new \Concrete\Command\BuildCommand($c);
         };
 
-        $c['commands'] = function($c) {
+        $c['commands'] = function ($c) {
             return array(
                 $c['command.build']
             );
         };
 
-        $c['git.version'] = function($c) {
+        $c['git.version'] = function ($c) {
             return new \Concrete\Processor\GitTagVersion();
         };
 
