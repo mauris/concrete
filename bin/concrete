@@ -11,11 +11,8 @@
 
 require(__DIR__ . '/../src/Concrete/Bootstrap.php');
 
-use Concrete\Command\BuildCommand;
-use Symfony\Component\Console\Application;
-use Concrete\Processor\GitTagVersion;
+use Concrete\App\Container;
 
-$versionProc = new GitTagVersion();
-$application = new Application('Concrete PHAR Compiler for PHP', $versionProc->process('{{version}}'));
-$application->add(new BuildCommand());
-$application->run();
+$container = new Container();
+$pimple = $container->create();
+$pimple['application']->run();
