@@ -24,31 +24,27 @@ use Symfony\Component\Process\Process;
  */
 class GitTagVersion implements ProcessorInterface
 {
-
     /**
-     * The version number fetched from the Git repository
-     * @var string
-     * @since 1.0.1
-     */
-    private $version;
-
-    /**
-     * Create a new GitTagVersion object
-     * @throws \RuntimeException Thrown when "git log" cannot be executed.
-     * @since 1.0.1
-     */
-    public function __construct()
+    * Fetches the version number from Git
+    * @throws \RuntimeException Thrown when "git log" cannot be executed.
+    * @since 1.2.1
+    */
+    protected function getVersion()
     {
-        $process = new Process('git log --pretty="%h" -n1 HEAD');
-        if ($process->run() != 0) {
-            throw new \RuntimeException('Can\'t run "git log". Git must be executable and you must compile from a git repository clone.');
-        }
-        $this->version = trim($process->getOutput());
-
+        $version = '';
         $processTag = new Process('git describe --tags HEAD');
         if ($processTag->run() == 0) {
-            $this->version = trim(strtok($processTag->getOutput(), "\n"));
+            $version = trim(strtok($processTag->getOutput(), "\n"));
         }
+
+        if (!$version) {
+            $process = new Process('git log --pretty="%h" -n1 HEAD');
+            if ($process->run() != 0) {
+                throw new \RuntimeException('Can\'t run "git log". Git must be installed and you must compile from a local git repository.');
+            }
+            $version = trim($process->getOutput());
+        }
+        return $version;
     }
 
     /**
@@ -58,10 +54,11 @@ class GitTagVersion implements ProcessorInterface
      */
     public function process($source)
     {
-        if ($this->version) {
+        $version = $this->getVersion();
+        if ($version) {
             // the breaking up of the version string is to prevent it from being parsed
             // during self-compilation.
-            $source =  str_replace('{{'.'version'.'}}', $this->version, $source);
+            $source =  str_replace('{{'.'version'.'}}', $version, $source);
         }
         return $source;
     }
