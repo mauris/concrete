@@ -26,7 +26,7 @@ class GitTagVersion implements ProcessorInterface
 {
     /**
     * Fetches the version number from Git
-    * @throws \RuntimeException Thrown when "git log" cannot be executed.
+    * @throws \RuntimeException Thrown when "git" cannot be executed.
     * @since 1.2.1
     */
     protected function getVersion()
