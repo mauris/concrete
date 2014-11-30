@@ -45,7 +45,7 @@ class BuildCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $concrete = $container['concrete'];
+        $concrete = $this->container['concrete'];
         $concrete->build();
     }
 }
