@@ -58,7 +58,7 @@ class Concrete extends Compiler
      */
     protected function compile()
     {
-        echo "Packfire Concrete v{{version}}\nSam-Mauris Yong\n\n";
+        echo "Concrete v{{version}}\nSam-Mauris Yong\n\n";
         if (property_exists($this->config, 'alias')) {
             echo "Setting PHAR alias to " . $this->config->alias . "\n\n";
             $this->phar->setAlias($this->config->alias);
