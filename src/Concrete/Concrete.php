@@ -49,7 +49,11 @@ class Concrete extends Compiler
      */
     protected function loadConfig($config)
     {
-        $this->config = json_decode(file_get_contents($config));
+        if (file_exists($config)) {
+            $this->config = json_decode(file_get_contents($config));
+        } else {
+            throw new RuntimeException('The concrete.json build file could not be found in the current directory');
+        }
     }
 
     /**
