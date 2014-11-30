@@ -29,12 +29,12 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class BuildCommand extends Command
 {
-    private $concrete;
+    private $container;
 
-    public function __construct($concrete)
+    public function __construct($container)
     {
         parent::__construct();
-        $this->concrete = $concrete;
+        $this->container = $container;
     }
 
     protected function configure()
@@ -45,6 +45,7 @@ class BuildCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->concrete->build();
+        $concrete = $container['concrete'];
+        $concrete->build();
     }
 }

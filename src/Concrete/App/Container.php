@@ -33,7 +33,7 @@ class Container
         };
 
         $c['command.build'] = function($c) {
-            return new \Concrete\Command\BuildCommand($c['concrete']);
+            return new \Concrete\Command\BuildCommand($c);
         };
 
         $c['commands'] = function($c) {
