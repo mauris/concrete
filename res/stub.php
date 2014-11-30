@@ -1,11 +1,11 @@
 #!/usr/bin/env php
 <?php
 /**
- * Packfire Concrete
+ * Concrete PHAR Compiler
  * By Sam-Mauris Yong
  *
  * Released open source under New BSD 3-Clause License.
- * Copyright (c) 2013, Sam-Mauris Yong Shan Xian <sam@mauris.sg>
+ * Copyright (c) 2014, Sam-Mauris Yong <sam@mauris.sg>
  * All rights reserved.
  */
 
