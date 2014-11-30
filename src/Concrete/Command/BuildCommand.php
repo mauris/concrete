@@ -33,6 +33,7 @@ class BuildCommand extends Command
 
     public function __construct($concrete)
     {
+        parent::__construct();
         $this->concrete = $concrete;
     }
 

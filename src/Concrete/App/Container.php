@@ -44,9 +44,9 @@ class Container
 
         $c['git.version'] = function($c) {
             return new \Concrete\Processor\GitTagVersion();
-        }
+        };
 
-        $c['application'] = function($c) {
+        $c['application'] = function ($c) {
             $versionProc = $c['git.version'];
             $application = new \Symfony\Component\Console\Application('Concrete PHAR Compiler for PHP', $versionProc->process('{{version}}'));
             $application->addCommands($c['commands']);
